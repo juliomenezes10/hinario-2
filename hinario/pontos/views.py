@@ -171,9 +171,8 @@ def pontosView(request, slug_id):
             return render(request, "pontos.html", {"ponto": pontos, "title": "Caboclos"})
         case "exus-pomba-giras":
             pontos = Ponto.objects.filter(category_id=26)
-            audio = Ponto.objects.filter(audio__contains=".mp3")
-
-            return render(request, "pontos.html", {"ponto": pontos, "audio": audio, "title": "Exus e Pomba Giras"})
+            
+            return render(request, "pontos.html", {"ponto": pontos, "title": "Exus e Pomba Giras"})
         case "criancas":
             pontos = Ponto.objects.filter(category_id=27)
 

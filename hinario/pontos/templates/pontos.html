@@ -15,7 +15,10 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="card-text" style="text-align: center;">{{ p }}</p>
-                            <audio controls autoplay> <source src="..\audios\{{p.audio}}" type="audio/mp3"> Sorry </audio>
+                            {% if p.audio %}
+                                <audio src="{{ p.audio.url }}" controls autoplay></audio>
+                                
+                            {% endif %}
                         </div>
                     </div>
             </div>
