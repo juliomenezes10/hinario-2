@@ -171,11 +171,11 @@ def pontosView(request, slug_id):
             return render(request, "pontos.html", {"ponto": pontos, "title": "Caboclos"})
         case "exus-pomba-giras":
             pontos = Ponto.objects.filter(category_id=26)
-            
+
             return render(request, "pontos.html", {"ponto": pontos, "title": "Exus e Pomba Giras"})
         case "criancas":
             pontos = Ponto.objects.filter(category_id=27)
-
+         
             return render(request, "pontos.html", {"ponto": pontos, "title": "Crianças"})
 
     return HttpResponse(f"{slug_id}")

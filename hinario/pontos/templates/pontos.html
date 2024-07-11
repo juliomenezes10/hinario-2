@@ -14,9 +14,9 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-text" style="text-align: center;">{{ p }}</p>
+                            <p class="card-text" style="text-align: center;">{{ p|linebreaks }}</p>
                             {% if p.audio %}
-                                <audio src="{{ p.audio.url }}" controls autoplay></audio>
+                                <audio src="{{ p.audio.url }}" controls></audio>
                                 
                             {% endif %}
                         </div>
