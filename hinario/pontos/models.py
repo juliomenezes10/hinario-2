@@ -47,13 +47,12 @@ class CreateHinario(models.Model):
         super().save(*args, **kwargs)
 
 class Ponto(models.Model):
-    id = None
     category = models.ForeignKey(CreateHinario, on_delete=models.PROTECT)
     ponto = models.TextField()
     audio = models.FileField(upload_to="", max_length=100, blank=True)
+    urlYoutube = models.URLField(max_length=200, blank=True)
     dateofpost = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{str(self.ponto)}"
-
-    
+  

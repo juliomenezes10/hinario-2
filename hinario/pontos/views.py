@@ -56,7 +56,7 @@ def signout(request):
 
 def addpontos(request):
     if request.method == "POST":
-        form = HinarioForm(request.POST)
+        form = HinarioForm(request.POST, request.FILES)
         
         if form.is_valid():
             form.save()
@@ -68,7 +68,7 @@ def addpontos(request):
 
     else:
         form = HinarioForm()
-        return render(request, "addpontos.html", {"form": form})
+        return render(request, "addpontos.html", {"form": form})    
 
 def hinarioView(request):
     categorys =  CreateHinario.objects.all()
@@ -171,11 +171,23 @@ def pontosView(request, slug_id):
             return render(request, "pontos.html", {"ponto": pontos, "title": "Caboclos"})
         case "exus-pomba-giras":
             pontos = Ponto.objects.filter(category_id=26)
+            ponto = Ponto.objects.filter(audio__isnull=True)
+            print(ponto)
+            
 
             return render(request, "pontos.html", {"ponto": pontos, "title": "Exus e Pomba Giras"})
         case "criancas":
             pontos = Ponto.objects.filter(category_id=27)
-         
+            
+
             return render(request, "pontos.html", {"ponto": pontos, "title": "Crianças"})
 
     return HttpResponse(f"{slug_id}")
+
+def UpdateHino(request, ponto_id):
+    ponto = Ponto.objects.get(pk=ponto_id)
+    update_ponto = HinarioForm(request.POST or None, request.FILES or None, instance=ponto)
+    if update_ponto.is_valid():
+        update_ponto.save()
+        return redirect("pontos:hinario")
+    return render(request, "addaudio.html", { "update": update_ponto })

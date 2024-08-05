@@ -15,8 +15,11 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="card-text" style="text-align: center;">{{ p|linebreaks }}</p>
-                            {% if p.audio %}
+                            {% if p.audio or p.urlYoutube %}
                                 <audio src="{{ p.audio.url }}" controls></audio>
+                            {% else %}
+                                <a href="{% url "pontos:update-hino" p.id %}" class="btn btn-primary">Adicionar Audio</a>
+                                        
                                 
                             {% endif %}
                         </div>

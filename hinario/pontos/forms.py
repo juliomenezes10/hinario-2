@@ -19,3 +19,5 @@ class HinarioForm(ModelForm):
         self.helper.form_action = 'pontos:addpontos'
 
         self.helper.add_input(Submit('submit', 'Submit'))
+
+

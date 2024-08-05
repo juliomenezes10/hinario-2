@@ -13,6 +13,7 @@ urlpatterns = [
     path("signout/", views.signout, name="signout"),
     path("hinario/", views.hinarioView, name="hinario"),
     path("hinario/<slug:slug_id>", views.pontosView, name="hino"),
+    path("hinario/update-ponto/<int:ponto_id>", views.UpdateHino, name="update-hino")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
