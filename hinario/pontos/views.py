@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from .forms import HinarioForm
 from .models import Ponto, CreateHinario
 
+from .function import upload_to_s3
+
 
 # Create your views here.
 def home(request):
@@ -59,6 +61,8 @@ def addpontos(request):
         form = HinarioForm(request.POST, request.FILES)
         
         if form.is_valid():
+            music_file = form.cleaned_data['audio']
+            upload_to_s3(music_file)
             form.save()
 
             return redirect("pontos:home")
@@ -171,8 +175,6 @@ def pontosView(request, slug_id):
             return render(request, "pontos.html", {"ponto": pontos, "title": "Caboclos"})
         case "exus-pomba-giras":
             pontos = Ponto.objects.filter(category_id=26)
-            ponto = Ponto.objects.filter(audio__isnull=True)
-            print(ponto)
             
 
             return render(request, "pontos.html", {"ponto": pontos, "title": "Exus e Pomba Giras"})
@@ -188,6 +190,8 @@ def UpdateHino(request, ponto_id):
     ponto = Ponto.objects.get(pk=ponto_id)
     update_ponto = HinarioForm(request.POST or None, request.FILES or None, instance=ponto)
     if update_ponto.is_valid():
+        music_file = update_ponto.cleaned_data['audio']
+        upload_to_s3(music_file)
         update_ponto.save()
         return redirect("pontos:hinario")
     return render(request, "addaudio.html", { "update": update_ponto })

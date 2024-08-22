@@ -1,9 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-import textwrap
-
-from pytube import YouTube
+from django.conf import settings
 
 # Create your models here.
 class CreateHinario(models.Model):
